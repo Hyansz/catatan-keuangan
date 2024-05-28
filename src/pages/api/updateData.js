@@ -14,13 +14,19 @@ export default async function updateData(req, res) {
         if (
             !id ||
             !nama_transaksi ||
-            !income ||
-            !outcome ||
             !tanggal ||
             !bulan ||
             !tahun
         ) {
             return res.status(400).json({ message: "Semua field harus diisi" });
+        }
+
+        if (income === 0 && outcome === 0) {
+            return res.status(400).json({ message: "Harus diisi salah satu" });
+        }
+
+        if (income !== 0 && outcome !== 0) {
+            return res.status(400).json({ message: "Harus diisi salah satu" });
         }
 
         const { rows } = await sql`

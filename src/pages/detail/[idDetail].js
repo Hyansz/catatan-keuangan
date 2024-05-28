@@ -1,40 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-    padding: 20px;
-    font-family: Arial, sans-serif;
-`;
-
-const Header = styled.h1`
-    text-align: center;
-    color: #2c3e50;
-`;
-
-const DetailCard = styled.div`
-    background-color: #f8f9fa;
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-`;
-
-const DetailItem = styled.div`
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #495057;
-`;
-
-const BackButton = styled.button`
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-`;
 
 export default function Detail() {
     const router = useRouter();
@@ -54,42 +19,44 @@ export default function Detail() {
     }, [idDetail]);
 
     return (
-        <Container>
-            <Header>Detail Data</Header>
-            {showData ? (
-                <DetailCard>
-                    <DetailItem>
-                        <strong>Id:</strong> {idDetail}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Nama Transaksi:</strong>{" "}
-                        {showData.nama_transaksi}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Income:</strong> {showData.income}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Outcome:</strong> {showData.outcome}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Tanggal:</strong> {showData.tanggal}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Bulan:</strong> {showData.bulan}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Tahun:</strong> {showData.tahun}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Created At:</strong> {showData.created_at}
-                    </DetailItem>
-                </DetailCard>
-            ) : (
-                <p>Loading...</p>
-            )}
-            <BackButton onClick={() => router.push("/")}>
+        <div className="w-10/12 m-auto mt-10 rounded-lg border-2 border-blue-500 shadow-xl shadow-slate-400">
+            <h1 className="font-bold text-xl text-center p-2 pt-5">Detail Data</h1>
+            <div className="px-10 py-5">
+                {showData ? (
+                    <div className="border-slate-500 border-2 text-black font-semibold items-center py-2 px-3 rounded-md flex justify-between mx-auto my-4 shadow-md shadow-blue-400">
+                        <div>
+                            <strong>Id:</strong> {idDetail}
+                        </div>
+                        <div>
+                            <strong>Nama Transaksi:</strong>{" "}
+                            {showData.nama_transaksi}
+                        </div>
+                        <div>
+                            <strong>Income:</strong> {showData.income}
+                        </div>
+                        <div>
+                            <strong>Outcome:</strong> {showData.outcome}
+                        </div>
+                        <div>
+                            <strong>Tanggal:</strong> {showData.tanggal}
+                        </div>
+                        <div>
+                            <strong>Bulan:</strong> {showData.bulan}
+                        </div>
+                        <div>
+                            <strong>Tahun:</strong> {showData.tahun}
+                        </div>
+                        <div>
+                            <strong>Created At:</strong> {showData.created_at}
+                        </div>
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </div>
+            <button onClick={() => router.push("/")} className="bg-blue-500 text-white py-2 px-3 rounded-md shadow-md shadow-blue-400 flex m-auto mb-8">
                 Kembali ke Halaman Depan
-            </BackButton>
-        </Container>
+            </button>
+        </div>
     );
 }

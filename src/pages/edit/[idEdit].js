@@ -1,50 +1,5 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-    padding: 20px;
-    font-family: Arial, sans-serif;
-`;
-
-const Header = styled.h1`
-    text-align: center;
-    color: #2c3e50;
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: auto;
-`;
-
-const FormGroup = styled.div`
-    margin-bottom: 15px;
-`;
-
-const Label = styled.label`
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #495057;
-`;
-
-const Input = styled.input`
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-`;
-
-const SubmitButton = styled.button`
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-`;
 
 export default function EditData() {
     const router = useRouter();
@@ -100,71 +55,80 @@ export default function EditData() {
     };
 
     return (
-        <Container>
+        <div>
             {dataDetail === undefined && <p>Loading...</p>}
             {dataDetail === null && <p>Data Kosong</p>}
             {dataDetail && (
-                <div>
-                    <Header>Edit Data Transaksi</Header>
-                    <Form onSubmit={handleSubmit}>
-                        <FormGroup>
-                            <Label>Nama Transaksi:</Label>
-                            <Input
+                <div className="w-10/12 m-auto mt-10 rounded-lg border-2 border-blue-500 shadow-xl shadow-slate-400">
+                    <h1 className="font-bold text-xl text-center p-2 pt-5">Edit Data Transaksi</h1>
+                    <form onSubmit={handleSubmit} className="border-slate-500 border-2 text-black font-semibold items-center py-2 px-3 rounded-md mx-5 my-4 shadow-md shadow-blue-400">
+                        <div className="flex justify-between my-2 items-center">
+                            <label>Nama Transaksi:</label>
+                            <input
+                                className="border-2 border-black rounded-md pl-2 w-[80%]"
                                 name="nama_transaksi"
                                 defaultValue={dataDetail.nama_transaksi}
                             />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Income:</Label>
-                            <Input
+                        </div>
+                        <div className="flex justify-between my-2 items-center">
+                            <label>Income:</label>
+                            <input
+                                className="border-2 border-black rounded-md pl-2 w-[80%]"
                                 name="income"
                                 type="number"
                                 defaultValue={dataDetail.income}
                             />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Outcome:</Label>
-                            <Input
+                        </div>
+                        <div className="flex justify-between my-2 items-center">
+                            <label>Outcome:</label>
+                            <input
+                                className="border-2 border-black rounded-md pl-2 w-[80%]"
                                 name="outcome"
                                 type="number"
                                 defaultValue={dataDetail.outcome}
                             />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Tanggal:</Label>
-                            <Input
+                        </div>
+                        <div className="flex justify-between my-2 items-center">
+                            <label>Tanggal:</label>
+                            <input
+                                className="border-2 border-black rounded-md pl-2 w-[80%]"
                                 name="tanggal"
                                 type="number"
                                 defaultValue={dataDetail.tanggal}
                             />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Bulan:</Label>
-                            <Input
+                        </div>
+                        <div className="flex justify-between my-2 items-center">
+                            <label>Bulan:</label>
+                            <input
+                                className="border-2 border-black rounded-md pl-2 w-[80%]"
                                 name="bulan"
                                 type="number"
                                 defaultValue={dataDetail.bulan}
                             />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Tahun:</Label>
-                            <Input
+                        </div>
+                        <div className="flex justify-between my-2 items-center">
+                            <label>Tahun:</label>
+                            <input
+                                className="border-2 border-black rounded-md pl-2 w-[80%]"
                                 name="tahun"
                                 type="number"
                                 defaultValue={dataDetail.tahun}
                             />
-                        </FormGroup>
-                        <SubmitButton type="submit">Update Data</SubmitButton>
-                        <button
-                            onClick={() => {
-                                router.push(`/`);
-                            }}>
-                            Kembali
-                        </button>
-                    </Form>
+                        </div>
+                        <div className="flex m-auto justify-center gap-5">
+                            <button type="submit" className="bg-orange-500 text-white py-2 px-3 rounded-md shadow-md shadow-blue-400">Update Data</button>
+                            <button
+                                className="bg-red-500 text-white py-2 px-3 rounded-md shadow-md shadow-blue-400"
+                                onClick={() => {
+                                    router.push(`/`);
+                                }}>
+                                Kembali
+                            </button>
+                        </div>
+                    </form>
                 </div>
             )}
-        </Container>
+        </div>
     );
 }
 

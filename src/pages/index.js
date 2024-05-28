@@ -1,86 +1,16 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-    padding: 20px;
-    font-family: Arial, sans-serif;
-`;
-
-const Header = styled.h1`
-    text-align: center;
-    color: #2c3e50;
-`;
-
-const AddButton = styled.button`
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-`;
-
-const NoteCard = styled.div`
-    background-color: #f8f9fa;
-    padding: 20px;
-    margin: 10px 0;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-    position: relative;
-`;
-
-const NoteTitle = styled.h2`
-    font-size: 20px;
-    color: #343a40;
-`;
-
-const DetailButton = styled.button`
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-`;
-
-const EditButton = styled.button`
-    background-color: #ffc107;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-`;
-
-const DeleteButton = styled.button`
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-    border-radius: 5px;
-`;
 
 export default function Home() {
     const router = useRouter();
-    const [showAllData, setShowAllData] = useState();
+    const [showAllTransaksi, setShowAllTransaksi] = useState();
 
     useEffect(() => {
         fetch(`/api/getData`)
             .then((res) => res.json())
             .then((data) => {
-                setShowAllData(data.data);
+                setShowAllTransaksi(data.data);
+                console.log(data.data)
             })
             .catch((err) => {
                 console.error("Error fetching data:", err);
@@ -107,35 +37,40 @@ export default function Home() {
     };
 
     return (
-        <Container>
-            <Header>Halaman Depan</Header>
-            <AddButton onClick={() => router.push(`/add-data`)}>
+        <div className="w-10/12 m-auto mt-10 rounded-lg border-2 border-blue-500 shadow-xl shadow-slate-400">
+            <h1 className="font-bold text-xl text-center p-2 pt-5">Halaman Depan</h1>
+            <button className="bg-green-500 text-white py-2 px-3 rounded-md flex mx-auto mt-4 shadow-lg shadow-green-300" onClick={() => router.push(`/add-data`)}>
                 Tambah Data
-            </AddButton>
-            <div>
-                {showAllData &&
-                    showAllData.map((data, index) => {
+            </button>
+            <div className="px-10 py-5">
+                {showAllTransaksi &&
+                    showAllTransaksi.map((transaksi, index) => {
                         return (
-                            <NoteCard key={index}>
-                                <NoteTitle>{data.title}</NoteTitle>
-                                <p>{data.id}</p>
-                                <DetailButton
-                                    onClick={() =>
-                                        router.push(`/detail/${data.id}`)
-                                    }>
-                                    Detail
-                                </DetailButton>
-                                <EditButton onClick={() => handleEdit(data.id)}>
-                                    Edit
-                                </EditButton>
-                                <DeleteButton
-                                    onClick={() => handleDelete(data.id)}>
-                                    Delete
-                                </DeleteButton>
-                            </NoteCard>
+                            <div key={index} className="border-slate-500 border-2 text-black font-semibold items-center py-2 px-3 rounded-md flex justify-between mx-auto my-4 shadow-md shadow-blue-400">
+                                <div>
+                                    <p>{transaksi.nama_transaksi} In: {transaksi.income} Out: {transaksi.outcome} {transaksi.tanggal}/{transaksi.bulan}/{transaksi.tahun}</p>
+                                </div>
+                                <div className="flex gap-6">
+                                    <button
+                                        className="bg-blue-500 text-white py-2 px-3 rounded-md shadow-md shadow-blue-400"
+                                        onClick={() =>
+                                            router.push(`/detail/${transaksi.id}`)
+                                        }>
+                                        Detail
+                                    </button>
+                                    <button className="bg-orange-500 text-white py-2 px-3 rounded-md shadow-md shadow-orange-400" onClick={() => handleEdit(transaksi.id)}>
+                                        Edit
+                                    </button>
+                                    <button
+                                        className="bg-red-500 text-white py-2 px-3 rounded-md shadow-md shadow-red-400"
+                                        onClick={() => handleDelete(transaksi.id)}>
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
                         );
                     })}
             </div>
-        </Container>
+        </div>
     );
 }
