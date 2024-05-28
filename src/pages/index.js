@@ -38,7 +38,7 @@ export default function Home() {
 
     return (
         <div className="w-10/12 m-auto mt-10 rounded-lg border-2 border-blue-500 shadow-xl shadow-slate-400">
-            <h1 className="font-bold text-xl text-center p-2 pt-5">Halaman Depan</h1>
+            <h1 className="font-bold text-xl text-center p-2 pt-5">Catatan Keuangan-Ku</h1>
             <button className="bg-green-500 text-white py-2 px-3 rounded-md flex mx-auto mt-4 shadow-lg shadow-green-300" onClick={() => router.push(`/add-data`)}>
                 Tambah Data
             </button>
