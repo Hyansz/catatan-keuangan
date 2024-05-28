@@ -42,6 +42,7 @@ export default function Home() {
             <button className="bg-green-500 text-white py-2 px-3 rounded-md flex mx-auto mt-4 shadow-lg shadow-green-300" onClick={() => router.push(`/add-data`)}>
                 Tambah Data
             </button>
+            {showAllTransaksi && showAllTransaksi.length === 0 && <h1 className="mt-7 text-center">Data Kosong</h1>}
             <div className="px-10 py-5">
                 {showAllTransaksi &&
                     showAllTransaksi.map((transaksi, index) => {
